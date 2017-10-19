@@ -13,7 +13,7 @@ class FooAppenderMiddleware(object):
         self.app = app
         self.logger = get_logger(conf, log_route='fooappender_middleware')
 
-        # The value doesn't have to be bar: allow it to be configurable, from our middleware (paste) config.
+        # The value part of our metadata keyval doesn't have to be "bar"; allow it to be configurable, from our middleware config.
         # The default is 'bar'.
         self.bar = conf.get('bar', 'bar');
         # A regular expression. If this matches the full object path (account/container/object)
@@ -25,8 +25,9 @@ class FooAppenderMiddleware(object):
     def __call__(self, env, start_response):
         req = Request(env)
 
-        # We don't want to block request we don't care about, so befre doing anything else we do everything we can 
-        # to allow thoese reqeusts we *don't* care about further on up the middleware pipeline.
+        # We don't want to block requests we don't care about, so before doing anything else, we do everything we can 
+        # to allow those reqeusts we *don't* care about further on down the middleware pipeline.
+        # We get out of the way as quickly as possible!
 
         # We only care about PUT and POST requests.
         if env['REQUEST_METHOD'] not in ['PUT','POST']:
@@ -35,7 +36,6 @@ class FooAppenderMiddleware(object):
         version, account, container, obj = split_path(
             env['PATH_INFO'], 1, 4, True)
  
-        # I've left the logging at /info for demo purposes, but you'll probably want to tone it down. Or remove it.
         self.logger.info("fooappender_middleware: looks like we're uploading %s/%s/%s" % ( account, container, obj ))
 
         # Check there is an object component; we don't want this request if it pertain to an account or container, for example.
@@ -44,7 +44,7 @@ class FooAppenderMiddleware(object):
 
         self.logger.info("fooappender_middleware: looks like we're uploading an object, so I might be interested")
 
-        # Chec our account/container/object regex. If we're not supposed to enforce metadata on this request, allow it to pass through.
+        # Check our account/container/object regex. If we're not supposed to enforce metadata on this request, allow it to pass through.
         self.logger.info("fooappender_middleware: enforce pattern is %s " % self.enforce_pattern)
         if not self.enforce_pattern_re.search("%s/%s/%s" % (account,container,obj)):
           return self.app(env, start_response)
