@@ -11,12 +11,14 @@ To restrict this behaviour to certain accounts, containers, or objects, you can 
 
 How do I deploy it?
 ===================
-The easiest way to get it up and running is to copy the fooappender_middleware directory containing `__init__.py` to 
-```
-  /opt/ss/lib/python2.7/site-packages
-```
-...on every Swift proxy node on your cluster. Then:
+The easiest way to deploy this is to copy `__init.py__` to `/opt/ss/lib/python2.7/site-packages/fooappender_middleware/__init__.py` on *every* Swift node running proxy services in your cluster. The `fooappender_middleware`, and its content, should be owned by root.
 
+To do this quickly, log in as root, and clone this repo:
+
+```
+  # cd /opt/ss/lib/python2.7/site-packages && git clone https://github.com/swiftstack/fooappender_middleware.git
+```
+ 
 ### Enable custom middleware on your SwiftStack Controller
 As root, login to the controller over ssh, become root, and execute the below if you have not already to enable the **Custom Middleware** feature:
 ```
