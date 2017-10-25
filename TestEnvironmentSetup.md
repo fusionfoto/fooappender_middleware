@@ -79,7 +79,7 @@ esac
 $ sh natnetwork.sh start
 ```
 
-...which will add a load of port forwards for you. To remove them, run the sccript again but with a `stop` argument.
+...which will add a load of port forwards for you. To remove them, run the script again but with a `stop` argument.
 
 ## Virtual Machines - OS Setup
 We're going to set up two VMs using the network we just created.
@@ -214,11 +214,11 @@ You'll now need to install Ubuntu. I've used the desktop ISO for this, so your s
   - Select your 40GB drive (it should already be selected) from the drive dropdown;
   - Hit **Install Now**, then **Continue**
   - Select your prefered timezone and locale .
-  - When promoted set **Your name** to `swiftstack`
+  - When prompted set **Your name** to `swiftstack`
   - Set **Your computer's name** to `paco1.swiftstackdev.example.com`
-  - Set a password and hit **Continue**.
+  - Set a password for the `swiftstack` user and hit **Continue**.
 
-Once the OS had finished installing, reboot and set up a few more things:
+Once the OS has finished installing, reboot and set up a few more things:
 
  - Log in as `swiftstack`, then `sudo su -` to become the `root` user.
  - Set up a static IPV4. Make the content of /etc/network/interfaces the below:
@@ -264,7 +264,7 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 ```
 
-As with the controller, you may want to snapshot your VM here. Now move on to the  SwiftStack install below.
+As with the controller, you may want to snapshot your VM here. Now move on to the SwiftStack install below.
 
 
 ## Virtual Machines: SwiftStack Setup
@@ -272,8 +272,8 @@ We now have two VMs with fresh OS installs. We're going to install the SwiftStac
 
 You'll need two things before proceeding here:
 
- - A SwiftStack installer tarball. On your portal page (https://portal.swiftstack.com, under the “Downloads” tab, you'll find a download URL for the current release (below we use 5.9.0.3). In general, we suggest you use the same release as in your pre-prod environment(s) - you may need to ask your ops team for a copy.
- - You’ll also want a copy of the license file. You will need to ask your ops team for this. 
+ - A SwiftStack installer tarball. On your portal page (https://portal.swiftstack.com, under the “Downloads” tab, you'll find a download URL for the current release (below we use 5.9.0.3). In general, we suggest you use the same release as in your pre-prod environment(s) - you may need to ask your local SwiftStack admin for a copy.
+ - You’ll also want a copy of the license file. You will need to ask your admin for this. 
 
 
 ### SwiftStack Controller Install
@@ -284,9 +284,9 @@ You'll need two things before proceeding here:
 $ ssh -p 2022 root@localhost
 ```
  - Pull the *correct* version of the SwiftStack controller software to a temporary folder using cURL. 
- - The *correct* version is up to you, but is probably whatever version you run in your preprod - staging - environment.
+ - The *correct* version is up to you, but is probably whatever version you run in your pre-prod - staging - environment.
  - Below we use **5.9.0.3**; the URL can be found using your account at **https://portal.swiftstack.com**.
- - You may need to ask your Ops team if you need to use an earlier version of the binary.
+ - You may need to ask your admin if you need to use an earlier version of the binary.
 
 ```
 $ cd /tmp
@@ -327,7 +327,7 @@ You'll be taken to the **Configuration** screen.
  - Hit **Submit Changes**.
 
 
-Before moving on to our node, we need to add a Swift user. In the example below I use a single user - **swift** - who can access any storage account (is a *superuser*).
+Before moving on to our node, we need to add a Swift user. In the example below I use a single user - **swift** - who can access any storage account (they are a *superuser*).
  - Hit **Clusters** in the top nav bar.
  - Find your *test* cluster and hit **Users**.
  - Click **Create new user**.
@@ -337,7 +337,7 @@ Before moving on to our node, we need to add a Swift user. In the example below 
 We're now ready to set up our storage node.
 
 ### SwiftStack Storage Node (PACO) Install
-Ingesting a storage node is made more interesting by the fact that our SwiftStack Controller's TLS certificate is self-signed. 
+Ingesting a storage node is made more interesting by the fact that our SwiftStack Controller's TLS certificate is self-signed in the proces we're following here.
 
 We need to do the following:
 
@@ -402,7 +402,7 @@ Now, we need to:
 #### Ingest Storage Node
 
 - Following node installation, go to the *claim URL* provided.
-- Select **Claim Node As Normal; It is not a replcement** from the dropdown.
+- Select **Claim Node As Normal; It is not a replacement** from the dropdown.
 - Hit **Claim Node**.
 
 The controller will attempt to open up a secure communicatiom channel with the node over OpenVPN. When done, you'll see something like this:
@@ -430,7 +430,7 @@ To do this:
 
  - Select all the storage drives (there is a label - **All Unmanaged Drives** - you can click to do this quickly)
  - Hit **Format**. 
- - Once drives fomat has completed, select all formatted ("Swift") drives by clicking **All Drives**.
+ - Once the drive format has completed, select all formatted ("Swift") drives by clicking **All Drives**.
  - Click **Add or Remove Policies**.
  - In the modal, check **Standard Replica** and **Account and Container** and hit **Add Policies**.
 
