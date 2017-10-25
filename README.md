@@ -11,6 +11,8 @@ To restrict this behaviour to certain accounts, containers, or objects, you can 
 
 How do I deploy it?
 ===================
+We expect you to already have a SwiftStack environment setup for middleware development. If you do not have one, you can set one up by following the steps [here](TestEnvironmentSetup.md).
+
 The easiest way to deploy this is to copy `__init.py__` to `/opt/ss/lib/python2.7/site-packages/fooappender_middleware/__init__.py` on *every* Swift node running proxy services in your cluster. The `fooappender_middleware`, and its content, should be owned by root.
 
 To do this quickly, log in as root, and clone this repo:
