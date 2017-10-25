@@ -1,10 +1,10 @@
 # SwiftStack: Test Environment Setup
 
-Welcome to *one possible* method for setting up a small object storage test or development environment, on your own laptop, using SwiftStack.
+Welcome to *one possible* method for setting up a small object storage test or development environment, on your own laptop, using SwiftStack. 
 
 There are, unsurprisingly, many, many ways of doing this. 
 
-In this doc we're looking at the most manual way possible, because - being so manual - it is appliable to anyone who would like to set up a test environment, using an on-premises SwiftStack controller, regardless of the toolchain they use.
+In this doc we're looking at the most manual way possible, because - being so manual - it is appliable to anyone who would like to set up a test environment, using an on-premises SwiftStack controller, regardless of the toolchain they use. The intention is to take you through a simple setup, step by step. 
 
 That's not to say you shouldn't automate everything with Selenium, or run it in Vagrant, or containerize it, or whatever, if you want to. Feel free!
 
@@ -18,6 +18,10 @@ Once you have finished the install guide here, you'll end up with...
 ...both of these will end up on a private, NAT-ed network so that you can work with them irrespective of where your computer happens to be. 
 
 If you already have a dev setup, and you'd just like to know where the endpoints are - perhaps someone gave you a VM template(!) - then you can find the API endpoints you might be interested in right at the end of this doc.
+
+Finally, this isn't a replacement for the docs (of course). You can find them here:
+
+  https://www.swiftstack.com/docs/
 
 ## Network Setup
 
