@@ -68,7 +68,17 @@ Iterating and fixing problems
 =============================
 The most common symptom of a problem is that you become unable to connect to the Swift API. This would occur, for example, if your middleware throws an exception on load.
 
-To find the exception (and to fix it), log into your proxy as root, tail -f the syslog to see the ssswift-proxy service logs (on EL this would be accomplished via `journalctl -f`; on Ubuntu, I suspect `tail -f /var/log/syslog` is your friend here) - and look for the inevitable exception the Swift proxy service has thrown when trying to load the middleware.
+To find the exception (and to fix it), log into your proxy as root and find the exception the proxy has (probably) thrown.
+
+ - On EL 7, do this with `journalctl -f`.
+ - On Ubuntu (14), use instead `grep -ri '/opt/ss/bin/swift-init proxy-server reload' /var/log/ssnoded.log` (as the ssnoded process will constantly attempt to restart the proxy for you here).
+ 
+If the proxy service can load but you still want to inspect logging output, you can - on both the above platform - find output in
+```
+  /var/log/swift/all.log
+```
+
+...which should hopefully be enough to help you find the problem and fix it.
 
 Fix the exception in your `__init__.py`, then restart the proxy service to try again.
 
