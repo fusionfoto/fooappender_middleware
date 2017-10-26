@@ -451,6 +451,13 @@ After the deployment has finished - and if all went well - you'll end up with th
 
 ![complete](https://cloud.swiftstack.com/v1/AUTH_straill/voxygen/complete.png)
 
+> #### Aside: Ubuntu 14.04 LTS Desktop
+> For the example above I used the desktop Ubuntu 14 ISO, and saw some problems connecting to the Swift API on proxy restarts. I don't think you're likely to see the same with a server image, but for now it's probably worth running
+> ```
+> $ sudo ufw disable
+> ```
+> ...on your stoage node - if you're running a desktop image - to make sure it doesn't trouble you whilst developing.
+
 You're done! Now...
 
 **Snapshot your controller and Storage Node**!!!
